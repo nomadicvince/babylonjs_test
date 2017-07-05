@@ -40,32 +40,34 @@
                    skyboxMaterial.backFaceCulling = false;
                    skyboxMaterial.disableLighting = true;
                    skybox.infiniteDistance = true;
-                   skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("sky/sunset", newScene, ["_px.png", "_py.png", "_pz.png", "_nx.png", "_ny.png", "_nz.png"]);
+                   skyboxMaterial.reflectionTexture = new BABYLON.HDRCubeTexture("sky/test.hdr", newScene, 512);
                    skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
                    skybox.material = skyboxMaterial;
+
                    //Lights
                    var light = new BABYLON.DirectionalLight("Dir", new BABYLON.Vector3(0, -1, 0), newScene);
                    light.diffuse = new BABYLON.Color3(1, 1, 1);
                    light.specular = new BABYLON.Color3(1, 1, 1);
+                   light.intensity = 0.0;
 
                    //PBR Materials and textures
-                   var reflectionTexture = new BABYLON.CubeTexture("sky/sunset", newScene);
+                   var hdrTexture = new BABYLON.HDRCubeTexture("sky/test.hdr", newScene, 512);
 
                    //Carpet
-                   var carpetTexture = new BABYLON.Texture("textures/carpet_texture.jpg", newScene);
-                   //carpetTexture.uScale = 1;
-                   //carpetTexture.vScale = 50;
+                   var carpetTex = new BABYLON.Texture("textures/carpet_texture.jpg", newScene);
+                   carpetTex.uScale = 4;
+                   carpetTex.vScale = 6;
 
                    var carpetMat = new BABYLON.PBRMaterial("Carpet", newScene);
-                   carpetMat.albedoTexture = carpetTexture;
-                   carpetMat.reflectivityColor = new BABYLON.Color3(1, 0.7, 0.5);
-                   //carpetMat.albedoColor = new BABYLON.Color3(1, 1, 1);
-                   //carpetMat.microSurface = 0.1;
-                  // carpetMat.directIntensity = .7;
-                   //carpetMat.environmentIntensity = 1;
-                   //carpetMat.cameraExposure = 0.86;
-                  // carpetMat.cameraContrast = 1.66;
-                   //carpetMat.reflectionTexture = reflectionTexture;
+                   carpetMat.albedoTexture = carpetTex;
+                   carpetMat.reflectionTexture = hdrTexture;
+                   carpetMat.reflectionTexture.coordinatesMode = BABYLON.Texture.PLANAR_MODE;
+                   carpetMat.reflectivityColor = new BABYLON.Color3(0.0, 0.0, 0.0);
+                   carpetMat.microSurface = .3;
+                   carpetMat.directIntensity = .7;
+                   carpetMat.environmentIntensity = 3;
+                   carpetMat.cameraExposure = 0.86;
+                   carpetMat.cameraContrast = 1.66;
 
                    var carpet = newScene.getMeshByName("Carpet");
                    carpet.material = carpetMat;
