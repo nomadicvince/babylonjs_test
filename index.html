@@ -48,7 +48,7 @@
                    var light = new BABYLON.DirectionalLight("Dir", new BABYLON.Vector3(0, -1, 0), newScene);
                    light.diffuse = new BABYLON.Color3(1, 1, 1);
                    light.specular = new BABYLON.Color3(1, 1, 1);
-                   light.intensity = 0.0;
+                   light.intensity = 0.7;
 
                    //PBR Materials and textures
                    var hdrTexture = new BABYLON.HDRCubeTexture("sky/test.hdr", newScene, 512);
@@ -71,6 +71,28 @@
 
                    var carpet = newScene.getMeshByName("Carpet");
                    carpet.material = carpetMat;
+
+                   //Bed Materials and Textures
+
+                   //Comforter
+                   var comforterTex = new BABYLON.Texture("textures/comforter_texture.jpg", newScene);
+                   comforterTex.bumpTexture = new BABYLON.Texture("textures/comforter_textureNRM.jpg", newScene);
+                   comforterTex.uScale = .2;
+                   comforterTex.vScale = 1;
+
+                   var comforterMat = new BABYLON.PBRMaterial("Comforter", newScene);
+                   comforterMat.albedoTexture = comforterTex;
+                   comforterMat.reflectionTexture = hdrTexture;
+                   comforterMat.reflectionTexture.coordinatesMode = BABYLON.Texture.PLANAR_MODE;
+                   comforterMat.reflectivityColor = new BABYLON.Color3(0.0, 0.0, 0.0);
+                   comforterMat.microSurface = 1;
+                   comforterMat.directIntensity = .7;
+                   comforterMat.environmentIntensity = 3;
+                   comforterMat.cameraExposure = 0.90;
+                   comforterMat.cameraContrast = 1.80;
+
+                   var comforter = newScene.getMeshByName("luxury_bed_cover");
+                   comforter.material = comforterMat;
 
                    // Once the scene is loaded, just register a render loop to render it
                    engine.runRenderLoop(function() {
