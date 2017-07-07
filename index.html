@@ -17,7 +17,7 @@
          touch-action: none;
       }
    </style>
-   <script src="http://cdn.babylonjs.com/2-5/babylon.js"></script>
+   <script src="js/babylon_master.js"></script>
 </head>
 <body>
    <canvas id="renderCanvas"></canvas>
@@ -48,7 +48,7 @@
                    var light = new BABYLON.DirectionalLight("Dir", new BABYLON.Vector3(0, -1, 0), newScene);
                    light.diffuse = new BABYLON.Color3(1, 1, 1);
                    light.specular = new BABYLON.Color3(1, 1, 1);
-                   light.intensity = 0.7;
+                   light.intensity = 0.2;
 
                    //PBR Materials and textures
                    var hdrTexture = new BABYLON.HDRCubeTexture("sky/test.hdr", newScene, 512);
@@ -84,8 +84,8 @@
                    comforterMat.albedoTexture = comforterTex;
                    comforterMat.reflectionTexture = hdrTexture;
                    comforterMat.reflectionTexture.coordinatesMode = BABYLON.Texture.PLANAR_MODE;
-                   comforterMat.reflectivityColor = new BABYLON.Color3(0.0, 0.0, 0.0);
-                   comforterMat.microSurface = 1;
+                   comforterMat.reflectivityColor = new BABYLON.Color3(0.6, 0.6, 0.6);
+                   comforterMat.microSurface = 0.2;
                    comforterMat.directIntensity = .7;
                    comforterMat.environmentIntensity = 3;
                    comforterMat.cameraExposure = 0.90;
